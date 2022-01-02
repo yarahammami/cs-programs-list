@@ -10,16 +10,9 @@ body{
 }
 
 .container ol {
-    list-style-position: inside;
     display: grid; 
     place-items: center; 
 }
 
 
-button{
-    background-color: white;
-    border: solid black 2px;
-    border-radius: 5px;
-    
-}
 
