@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Welcome to Firebase Hosting</title>
+    <!-- FIREBASE SCRIPTS START HERE -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-storage.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      * {
+        font-family: "Avenir";
+      }
+      h1 {
+        text-align: center;
+      }
+      li,
+      button,
+      input {
+        border: 3px solid black;
+        padding: 10px;
+        border-radius: 7px;
+        background-color: white;
+        display: block;
+        margin: 10px auto;
+        outline: none;
+      }
+
+      .container {
+        margin: 100px auto 100px auto;
+        width: 50%;
+        border-radius: 10px;
+        padding: 10px;
+      }
+
+      @media (max-width: 900px) {
+        .container {
+          width: 75%;
+        }
+      }
+    </style>
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyDSsgDMMpmAnZo1JoM_f7N7z3pqk1Kzp2o",
+        authDomain: "cs-member-page.firebaseapp.com",
+        databaseURL: "https://cs-member-page-default-rtdb.firebaseio.com",
+        projectId: "cs-member-page",
+        storageBucket: "cs-member-page.appspot.com",
+        messagingSenderId: "1074661407724",
+        appId: "1:1074661407724:web:574584604f847036731ec9",
+      };
+
+      firebase.initializeApp(firebaseConfig);
+
+      const db = firebase.database();
+      const programs = db.ref("cs-programs");
+
+      programs.once("value").then(function (snapshot) {
+        var data = snapshot.val();
+
+        for (let i = 0; i < data.length; i++) {
+          document.getElementById("progList").innerHTML +=
+            "<li>" + data[i] + "</li>";
+        }
+      });
+
+      function addProgram() {
+        var input = document.getElementById("program_input").value;
+        programs.once("value").then(function (snapshot) {
+          var data = snapshot.val();
+          var number_of_programs = data.length;
+
+          programs.update({
+            [number_of_programs]: input,
+          });
+          data.push(input);
+          document.getElementById("progList").innerHTML +=
+            "<li>" + data[number_of_programs] + "</li>";
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>CS Programs List</h1>
+      <ol id="progList"></ol>
+      <input
+        type="text"
+        id="program_input"
+        placeholder="Enter Program Here..."
+      />
+      <button class="btn" onclick="addProgram()">Add Program</button>
+    </div>
+  </body>
+</html>

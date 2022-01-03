@@ -1,0 +1,40 @@
+{
+  "rules": {
+      "repl_links":{
+      ".read": "auth.email == 'talal@codingsensation.com'",
+    	".write": "auth.email == 'yara@codingsensation.com' || auth.email == 'jad@codingsensation.com' || auth.email == 'atieh@codingsensation.com'"
+    },
+  
+      "recruiting":{
+      ".read": "auth.email == 'talal@codingsensation.com' || auth.email == 'abdallah@codingsensation.com'",
+    	".write": "false"
+    },
+   
+		  "assigned_tasks":{
+      ".read": "auth.email == 'talal@codingsensation.com' || auth.email == 'abdallah@codingsensation.com' || auth.email == 'bob@codingsensation.com'",
+    	".write": "false",
+        "development":{
+            "atieh":{
+              ".read": "auth.email == 'atieh@codingsensation.com'",
+          		".write": "false"
+            },
+              "jad":{
+              ".read": "auth.email == 'jad@codingsensation.com'",
+          		".write": "false"
+            },
+             "yara":{
+              ".read": "auth.email == 'yara@codingsensation.com'",
+          		".write": "false"
+            }
+          }
+        },
+		
+        
+      "zoom":{
+        ".read": "auth != null",
+        ".write": "auth.email == 'talal@codingsensation.com'",
+      },
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+}
